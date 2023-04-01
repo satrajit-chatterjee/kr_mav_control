@@ -1,0 +1,9 @@
+<launch>
+
+  <include file="$(find ompl_rrtstar)/launch/rrt_planner.launch"/>
+
+  <node pkg ="sim_manager" name ="sim_manager_node" type ="sim_manager.py" output = "screen">    
+
+  </node>
+
+</launch>

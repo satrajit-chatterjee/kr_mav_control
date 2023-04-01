@@ -48,7 +48,6 @@ class KrMavInterface(object):
       rospy.loginfo(resp)
     except rospy.ServiceException as e:
       rospy.logwarn("Service call failed: %s"%e)
-      return 'aborted'
 
   def motors_off(self):
     try:
@@ -57,16 +56,15 @@ class KrMavInterface(object):
       rospy.loginfo(resp)
     except rospy.ServiceException as e:
       rospy.logwarn("Service call failed: %s"%e)
-      return 'aborted'
 
   def take_off(self):
     try:
       takeoff = rospy.ServiceProxy('/' + self.mav_name + '/mav_services/takeoff', Trigger)
       resp = takeoff()
       rospy.loginfo(resp)
+      return resp
     except rospy.ServiceException as e:
       rospy.logwarn("Service call failed: %s"%e)
-      return 'aborted'
 
   def hover(self):
     rospy.logwarn("Transition to hover")
