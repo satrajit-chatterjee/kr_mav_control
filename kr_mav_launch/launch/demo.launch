@@ -60,4 +60,7 @@
     </include>
 
   </group>
+
+<include file="$(find param_env)/launch/rviz.launch"/>
+
 </launch>

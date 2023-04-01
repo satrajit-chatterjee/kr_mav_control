@@ -19,7 +19,8 @@ class KrMavInterface(object):
     self.mav_namespace = mav_namespace
     self.id = id
 
-    self.mav_name = self.mav_namespace + str(self.id)
+    # self.mav_name = self.mav_namespace + str(self.id)
+    self.mav_name = self.mav_namespace 
 
     self.pub_vel = rospy.Publisher('/' + self.mav_name + '/cmd_vel', Twist, queue_size=10)
 
