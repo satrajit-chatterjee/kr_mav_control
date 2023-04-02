@@ -87,24 +87,6 @@ def plan_callback(path_msg):
         present_pos = waypoints_list[0]
 
 
-def replan():
-    global replan_service
-
-    # Replan
-    replan_service = rospy.ServiceProxy(replan_service, ReplanTrigger)
-
-    # Create a request message
-    request = ReplanTriggerRequest()
-    request.replan = True
-
-    response = replan_service(request)
-
-    if response.success:
-        rospy.loginfo("Replanning complete and waypoints updated!")
-        # Wait for new plan to be published
-        rospy.sleep(5)
-
-
 def final_waypt_publisher():
     global waypoints_list, frame_id, fn_waypt_pub
     
@@ -207,10 +189,6 @@ def manager():
 
             waypoint_idx += 1
         
-        # If finished executing plan, replan
-        replan()
-
-
 def main():
     rospy.init_node('sim_manager_node', anonymous=True)
 
@@ -227,11 +205,6 @@ def main():
     rospy.Subscriber('/rrt_star_planner/planner/rrt_plan', Path, plan_callback)
     rospy.spin()
 
-
-    # while not rospy.is_shutdown():
-    #     pass
-
-    # rospy.spin()
 
 if __name__ == '__main__':
     try:
