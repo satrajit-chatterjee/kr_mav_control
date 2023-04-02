@@ -107,6 +107,7 @@ class KrMavInterface(object):
       srv = rospy.ServiceProxy('/' + self.mav_name +'/mav_services/goTo', Vec4)
       resp = srv([x, y, z, yaw])
       rospy.loginfo(resp)
+      return resp
     except rospy.ServiceException as e:
       rospy.logwarn("Service call failed: %s" % e)
       return False
