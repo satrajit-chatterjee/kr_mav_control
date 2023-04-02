@@ -168,11 +168,11 @@ def manager():
                 rospy.logwarn("Failed to takeoff, retrying...")
                 continue
     
+    waypoint_idx = 0
     while not rospy.is_shutdown():
         # Follow waypoints
-        waypoint_idx = 0
         while waypoint_idx < len(waypoints_list):
-            rospy.logwarn("Going to waypoint # " + str(waypoint_idx) + " of " + str(len(waypoints_list)))
+            rospy.logwarn("Going to waypoint # " + str(waypoint_idx+1) + " of " + str(len(waypoints_list)))
             waypoint = waypoints_list[waypoint_idx]
             resp = mav_obj.send_wp(waypoint.pose.position.x,
                             waypoint.pose.position.y,
@@ -188,7 +188,7 @@ def manager():
             robot_pose_publisher()
 
             waypoint_idx += 1
-        
+
 def main():
     rospy.init_node('sim_manager_node', anonymous=True)
 
